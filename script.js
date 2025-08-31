@@ -150,3 +150,41 @@ function render() {
     renderRecent();
     renderHistory();
 }
+
+
+
+
+
+/** -----------------------
+ *  Navigation
+ * ----------------------*/
+const views = {
+    dashboard: document.getElementById('view-dashboard'),
+    add: document.getElementById('view-add'),
+    withdraw: document.getElementById('view-withdraw'),
+    history: document.getElementById('view-history'),
+};
+
+function showView(name) {
+    Object.entries(views).forEach(([key, el]) => {
+        const hidden = key !== name;
+        el.classList.toggle('hidden', hidden);
+    });
+    // Update nav button styles
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        const isActive = btn.dataset.view === name;
+        btn.classList.toggle('bg-gray-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('shadow', isActive);
+        btn.classList.toggle('bg-gray-100', !isActive);
+        btn.classList.toggle('text-gray-900', !isActive);
+    });
+}
+
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-btn');
+    if (btn && btn.dataset.view) {
+        e.preventDefault();
+        showView(btn.dataset.view);
+    }
+});

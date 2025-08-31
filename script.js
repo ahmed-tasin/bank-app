@@ -75,3 +75,78 @@ function addTransaction(type, amount) {
 }
 
 
+
+/** -----------------------
+ *  Rendering
+ * ----------------------*/
+const balanceEl = document.getElementById('current-balance');
+const updatedEl = document.getElementById('last-updated');
+const recentTxEl = document.getElementById('recent-tx');
+const historyTableEl = document.getElementById('history-table');
+
+function renderBalance() {
+    balanceEl.textContent = fmtBDT.format(state.balance);
+    updatedEl.textContent = state.lastUpdated ? `Last updated: ${toLocalDT(state.lastUpdated)}` : '—';
+}
+
+function renderRecent() {
+    const rows = state.transactions.slice(0, 5).map(tx => {
+        const sign = tx.type === 'Add' ? '+' : '−';
+        const color = tx.type === 'Add' ? 'text-emerald-700' : 'text-rose-700';
+        return `
+            <tr class="border-b last:border-none">
+            <td class="whitespace-nowrap px-4 py-3 text-sm text-gray-500">${toLocalDT(tx.at)}</td>
+            <td class="whitespace-nowrap px-4 py-3 text-sm font-medium">${tx.type}</td>
+            <td class="whitespace-nowrap px-4 py-3 text-sm ${color} tabular-nums">${sign}${fmtBDT.format(tx.amount).replace('BDT', '').trim()}</td>
+            <td class="whitespace-nowrap px-4 py-3 text-sm text-gray-700 tabular-nums">${fmtBDT.format(tx.balanceAfter)}</td>
+            </tr>`;
+    }).join('');
+
+    recentTxEl.innerHTML = `
+        <table class="min-w-full text-left">
+            <thead>
+            <tr class="text-xs uppercase text-gray-500">
+                <th class="px-4 py-2">Date</th>
+                <th class="px-4 py-2">Type</th>
+                <th class="px-4 py-2">Amount</th>
+                <th class="px-4 py-2">Balance After</th>
+            </tr>
+            </thead>
+            <tbody>${rows || `<tr><td colspan="4" class="px-4 py-6 text-sm text-gray-500">No transactions yet.</td></tr>`}</tbody>
+        </table>`;
+}
+
+function renderHistory() {
+    const rows = state.transactions.map((tx, i) => {
+        const sign = tx.type === 'Add' ? '+' : '−';
+        const color = tx.type === 'Add' ? 'text-emerald-700' : 'text-rose-700';
+        return `
+        <tr class="border-b last:border-none">
+            <td class="px-4 py-3 text-sm text-gray-500">${i + 1}</td>
+            <td class="px-4 py-3 text-sm">${toLocalDT(tx.at)}</td>
+            <td class="px-4 py-3 text-sm font-medium">${tx.type}</td>
+            <td class="px-4 py-3 text-sm ${color} tabular-nums">${sign}${fmtBDT.format(tx.amount).replace('BDT', '').trim()}</td>
+            <td class="px-4 py-3 text-sm tabular-nums">${fmtBDT.format(tx.balanceAfter)}</td>
+        </tr>`;
+    }).join('');
+
+    historyTableEl.innerHTML = `
+        <table class="min-w-full text-left">
+        <thead>
+            <tr class="text-xs uppercase text-gray-500">
+                <th class="px-4 py-2">#</th>
+                <th class="px-4 py-2">Date</th>
+                <th class="px-4 py-2">Type</th>
+                <th class="px-4 py-2">Amount</th>
+                <th class="px-4 py-2">Balance After</th>
+            </tr>
+            </thead>
+            <tbody>${rows || `<tr><td colspan="5" class="px-4 py-6 text-sm text-gray-500">No transactions yet.</td></tr>`}</tbody>
+        </table>`;
+}
+
+function render() {
+    renderBalance();
+    renderRecent();
+    renderHistory();
+}

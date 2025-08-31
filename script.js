@@ -1,5 +1,4 @@
-/*storage and state */
-
+//storage and state
 const STORAGE_KEY = "flowerbank.v1";
 
 const initialState = () => ({
@@ -33,9 +32,9 @@ function saveState(state) {
 
 let state = loadState();
 
-/** -----------------------
- *  Utilities
- * ----------------------*/
+
+
+//Utilities
 const fmtBDT = new Intl.NumberFormat("en-BD", {
     style: "currency",
     currency: "BDT",
@@ -76,9 +75,7 @@ function addTransaction(type, amount) {
 
 
 
-/** -----------------------
- *  Rendering
- * ----------------------*/
+// Rendering
 const balanceEl = document.getElementById('current-balance');
 const updatedEl = document.getElementById('last-updated');
 const recentTxEl = document.getElementById('recent-tx');
@@ -153,11 +150,7 @@ function render() {
 
 
 
-
-
-/** -----------------------
- *  Navigation
- * ----------------------*/
+//Navigation
 const views = {
     dashboard: document.getElementById('view-dashboard'),
     add: document.getElementById('view-add'),
@@ -191,10 +184,8 @@ document.addEventListener('click', (e) => {
 
 
 
+//Forms & Validation
 
-/** -----------------------
- *  Forms & Validation
- * ----------------------*/
 function validatePositiveNumber(value) {
     if (Number.isNaN(value)) return 'Please enter a valid number.';
     if (value <= 0) return 'Amount must be greater than 0.';
@@ -232,8 +223,6 @@ addForm.addEventListener('submit', (e) => {
 
 
 
-
-
 // Withdraw
 const wForm = document.getElementById('form-withdraw');
 const wInput = document.getElementById('withdraw-amount');
@@ -265,11 +254,7 @@ wForm.addEventListener('submit', (e) => {
 
 
 
-
-
-/** -----------------------
- *  History actions
- * ----------------------*/
+//History actions
 document.getElementById('export-json').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -287,3 +272,9 @@ document.getElementById('reset-data').addEventListener('click', () => {
     render();
     showView('dashboard');
 });
+
+
+
+//Initial load
+render();
+showView('dashboard');

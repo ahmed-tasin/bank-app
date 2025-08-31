@@ -1,33 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="color-scheme" content="light dark">
-        <style>
-            .focus-ring:focus { outline: 3px solid #60a5fa; outline-offset: 2px; }
-        </style>
+    <style>
+        .focus-ring:focus {
+            outline: 3px solid #60a5fa;
+            outline-offset: 2px;
+        }
+    </style>
 </head>
+
 <body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
-    
-
-<header class="sticky top-0 z-20 border-b bg-white/80 backdrop-blur">
-    <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-        <h1 class="="text-2xl font-bold tracking-tight">Flower Bank</h1>
-        <nav class="flex gap-2">
-            <button data-view="dashboard" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-900 text-white shadow">Dashboard</button>
-            <button data-view="add" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Add Money</button>
-            <button data-view="withdraw" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Withdraw</button>
-            <button data-view="history" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">History</button>
-        </nav>
-    </div>
-</header>
 
 
+    <header class="sticky top-0 z-20 border-b bg-white/80 backdrop-blur">
+        <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+            <h1 class="=" text-2xl font-bold tracking-tight">Flower Bank</h1>
+            <nav class="flex gap-2">
+                <button data-view="dashboard"
+                    class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-900 text-white shadow">Dashboard</button>
+                <button data-view="add"
+                    class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Add Money</button>
+                <button data-view="withdraw"
+                    class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Withdraw</button>
+                <button data-view="history"
+                    class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">History</button>
+            </nav>
+        </div>
+    </header>
 
 
+
+    <main>
+        <!-- deshboard -->
+
+        <section id="view-dashboard" class="view grid gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="rounded-2xl bg-white p-6 shadow">
+                    <p class="text-sm text-gray-500">Current Balance</p>
+                    <p id="current-balance" class="mt-2 text-3xl font-bold tabular-nums">৳0.00</p>
+                    <p id="last-updated" class="mt-1 text-xs text-gray-500">—</p>
+                </div>
+                <div class="rounded-2xl bg-white p-6 shadow flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Quick Action</p>
+                        <p class="text-lg font-semibold">Add Money</p>
+                    </div>
+                    <button data-view="add"
+                        class="nav-btn focus-ring rounded-xl px-4 py-2 bg-emerald-600 text-white font-semibold shadow">Add</button>
+                </div>
+                <div class="rounded-2xl bg-white p-6 shadow flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500">Quick Action</p>
+                        <p class="text-lg font-semibold">Withdraw</p>
+                    </div>
+                    <button data-view="withdraw"
+                        class="nav-btn focus-ring rounded-xl px-4 py-2 bg-rose-600 text-white font-semibold shadow">Withdraw</button>
+                </div>
+            </div>
+
+            <div class="rounded-2xl bg-white p-6 shadow">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold">Recent Transactions</h2>
+                    <button data-view="history" class="nav-btn focus-ring text-sm font-semibold underline">View
+                        all</button>
+                </div>
+                <div id="recent-tx" class="mt-4 overflow-x-auto">
+                    <!-- Recent transactions table gets injected here -->
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
 
 
 
@@ -43,4 +105,5 @@
 
     <script src="./script.js"></script>
 </body>
+
 </html>

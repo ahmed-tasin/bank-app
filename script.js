@@ -32,3 +32,46 @@ function saveState(state) {
 }
 
 let state = loadState();
+
+/** -----------------------
+ *  Utilities
+ * ----------------------*/
+const fmtBDT = new Intl.NumberFormat("en-BD", {
+    style: "currency",
+    currency: "BDT",
+    minimumFractionDigits: 2,
+});
+
+function parseAmount(input) {
+    if (typeof input === "string") {
+        input = input.replace(/[,\s]/g, "");
+    }
+    const value = Number(input);
+    if (!Number.isFinite(value)) return NaN;
+    return Math.round(value * 100) / 100; // 2-decimal precision
+}
+
+function nowISO() {
+    return new Date().toISOString();
+}
+
+function toLocalDT(iso) {
+    try {
+        return new Date(iso).toLocaleString();
+    } catch {
+        return iso;
+    }
+}
+
+function addTransaction(type, amount) {
+    const id = crypto.randomUUID();
+    const balanceAfter = state.balance;
+    const entry = { id, type, amount, balanceAfter, at: nowISO() };
+    state.transactions.unshift(entry); // newest first
+    state.lastUpdated = entry.at;
+    saveState(state);
+    render();
+    return entry;
+}
+
+

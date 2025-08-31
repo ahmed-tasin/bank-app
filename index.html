@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="light dark">
+        <style>
+            .focus-ring:focus { outline: 3px solid #60a5fa; outline-offset: 2px; }
+        </style>
 </head>
-<body>
+<body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
     
 
-
+<header class="sticky top-0 z-20 border-b bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+        <h1 class="="text-2xl font-bold tracking-tight">Flower Bank</h1>
+        <nav class="flex gap-2">
+            <button data-view="dashboard" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-900 text-white shadow">Dashboard</button>
+            <button data-view="add" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Add Money</button>
+            <button data-view="withdraw" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">Withdraw</button>
+            <button data-view="history" class="nav-btn focus-ring rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100">History</button>
+        </nav>
+    </div>
+</header>
 
 
 

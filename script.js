@@ -203,3 +203,29 @@ function validatePositiveNumber(value) {
 }
 
 
+
+// Add Money
+const addForm = document.getElementById('form-add');
+const addInput = document.getElementById('add-amount');
+const addError = document.getElementById('add-error');
+
+addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const amount = parseAmount(addInput.value);
+    const msg = validatePositiveNumber(amount);
+    if (msg) {
+        addError.textContent = msg;
+        addError.classList.remove('hidden');
+        addInput.classList.add('border-rose-400', 'bg-rose-50');
+        return;
+    }
+    addError.classList.add('hidden');
+    addInput.classList.remove('border-rose-400', 'bg-rose-50');
+
+    state.balance = Math.round((state.balance + amount) * 100) / 100;
+    saveState(state);
+    addTransaction('Add', amount);
+
+    addInput.value = '';
+    showView('dashboard');
+});

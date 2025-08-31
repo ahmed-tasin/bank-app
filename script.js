@@ -188,3 +188,18 @@ document.addEventListener('click', (e) => {
         showView(btn.dataset.view);
     }
 });
+
+
+
+
+/** -----------------------
+ *  Forms & Validation
+ * ----------------------*/
+function validatePositiveNumber(value) {
+    if (Number.isNaN(value)) return 'Please enter a valid number.';
+    if (value <= 0) return 'Amount must be greater than 0.';
+    if (value > 1_000_000_000) return 'Amount is too large.';
+    return '';
+}
+
+

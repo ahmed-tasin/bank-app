@@ -229,3 +229,36 @@ addForm.addEventListener('submit', (e) => {
     addInput.value = '';
     showView('dashboard');
 });
+
+
+
+
+
+// Withdraw
+const wForm = document.getElementById('form-withdraw');
+const wInput = document.getElementById('withdraw-amount');
+const wError = document.getElementById('withdraw-error');
+
+wForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const amount = parseAmount(wInput.value);
+    let msg = validatePositiveNumber(amount);
+    if (!msg && amount > state.balance) {
+        msg = 'Insufficient balance for this withdrawal.';
+    }
+    if (msg) {
+        wError.textContent = msg;
+        wError.classList.remove('hidden');
+        wInput.classList.add('border-rose-400', 'bg-rose-50');
+        return;
+    }
+    wError.classList.add('hidden');
+    wInput.classList.remove('border-rose-400', 'bg-rose-50');
+
+    state.balance = Math.round((state.balance - amount) * 100) / 100;
+    saveState(state);
+    addTransaction('Withdraw', amount);
+
+    wInput.value = '';
+    showView('dashboard');
+});

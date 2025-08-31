@@ -83,6 +83,29 @@
 
 
 
+        <!-- Add Money -->
+        <section id="view-add" class="view hidden max-w-xl">
+            <div class="rounded-2xl bg-white p-6 shadow">
+                <h2 class="text-xl font-bold">Add Money</h2>
+                <p class="mt-1 text-sm text-gray-600">Enter an amount to deposit into your account.</p>
+                <form id="form-add" class="mt-6 grid gap-4" novalidate>
+                    <label class="grid gap-1">
+                        <span class="text-sm font-medium">Amount (BDT)</span>
+                        <input id="add-amount" inputmode="decimal" autocomplete="off" placeholder="e.g., 1000"
+                            class="focus-ring rounded-xl border px-4 py-3 shadow-sm" required />
+                    </label>
+                    <p id="add-error" class="text-sm text-rose-600 hidden"></p>
+                    <div class="flex items-center gap-3">
+                        <button type="submit"
+                            class="focus-ring rounded-xl bg-gray-900 text-white px-5 py-3 font-semibold shadow">Confirm
+                            Add</button>
+                        <button type="button" class="nav-btn focus-ring rounded-xl px-4 py-3 bg-gray-100"
+                            data-view="dashboard">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
 
 
 
